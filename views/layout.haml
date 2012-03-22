@@ -1,0 +1,14 @@
+!!!
+%html
+	%head
+		%title Israel Loves Iran &mdash; Join the campaign
+		%link{ :rel => 'stylesheet', :href => '/stylesheets/bootstrap.min.css', :type => 'text/css' }
+		%link{ :rel => 'stylesheet', :href => '/stylesheets/styles.css', :type => 'text/css' }
+		%script{ :type => 'text/javascript', :src => '/javascripts/bootstrap.min.js' }
+	%body
+		.container
+			.row
+				.span8.offset2
+					.masthead
+						%img{ :src => '/images/logo.jpg' }
+					= yield
