@@ -64,7 +64,7 @@ get '/facebook_callback/:image_file' do
   user = FbGraph::User.me(token)
   user.photo!(:url => image_url(params[:image_file]), :message => 'Israel Loves Iran')
 
-  redirect "/show/#{params[:image_file]}"
+  redirect "/show/#{params[:image_file]}?shared=1"
 end
 
 get '/stylesheets/styles.css' do

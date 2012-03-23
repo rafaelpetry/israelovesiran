@@ -1,3 +1,6 @@
+- if params[:shared]
+	.alert.alert-success
+		Your picture was posted on your Facebook profile.
 .show
 	%img.user-image{ :src => image_url }
 	%a.btn.btn-large.btn-primary{ :href => "/share/#{image_file}" } Share on Facebook
