@@ -28,10 +28,11 @@ post '/upload' do
   unless params['photo'] && (tempfile = params['photo'][:tempfile])
     redirect '/'
   end
-
+  
+  file_name = unique_filename
   image = add_logo(tempfile.path)
   AWS::S3::Base.establish_connection!(:access_key_id => settings.s3_key, :secret_access_key => settings.s3_secret)
-  AWS::S3::S3Object.store(unique_filename + '.jpg', image.to_blob, settings.s3_bucket, :access => :public_read)
+  AWS::S3::S3Object.store(file_name + '.jpg', image.to_blob, settings.s3_bucket, :access => :public_read)
 
   redirect "/show/#{file_name}"
 end
@@ -97,7 +98,7 @@ helpers do
   end
 
   def unique_filename
-    "#{Digest::SHA1.hexdigest("#{Time.now}#{Time.now.usec}")}.jpg"
+    Digest::SHA1.hexdigest("#{Time.now}#{Time.now.usec}")
   end
 end
 
