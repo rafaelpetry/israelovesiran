@@ -94,7 +94,7 @@ helpers do
   end
 
   def resize(image, banner)
-    banner.resize!(image.columns * 0.33, image.rows * 0.33)
+    banner.resize!(image.rows * 0.33, image.rows * 0.33)
   end
 
   def unique_filename
