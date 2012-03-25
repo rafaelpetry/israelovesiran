@@ -8,13 +8,13 @@
 		%label.control-label Color scheme
 		.controls
 			%label.radio
-				%input{ :type => 'radio', :name => 'color_scheme', :value => 1, :checked => 'checked' }
-				Green/Orange
+				%div.logo-preview.green-orange
+					%input{ :type => 'radio', :name => 'color_scheme', :value => 'green-orange', :checked => 'checked' }
 			%label.radio
-				%input{ :type => 'radio', :name => 'color_scheme', :value => 2 }
-				Green/Purple
+				%div.logo-preview.green-purple
+					%input{ :type => 'radio', :name => 'color_scheme', :value => 'green-purple' }
 			%label.radio
-				%input{ :type => 'radio', :name => 'color_scheme', :value => 3 }
-				Green/Blue
+				%div.logo-preview.green-blue
+					%input{ :type => 'radio', :name => 'color_scheme', :value => 'green-blue' }
 	.form-actions
 		%button.btn.btn-primary{ :type => 'submit' } Upload

@@ -28,9 +28,12 @@ post '/upload' do
   unless params['photo'] && (tempfile = params['photo'][:tempfile])
     redirect '/'
   end
-  
+
   file_name = unique_filename
-  image = add_logo(tempfile.path)
+  logo = logo_in(params[:color_scheme])
+
+  image = add_logo(tempfile.path, logo)
+
   AWS::S3::Base.establish_connection!(:access_key_id => settings.s3_key, :secret_access_key => settings.s3_secret)
   AWS::S3::S3Object.store(file_name + '.jpg', image.to_blob, settings.s3_bucket, :access => :public_read)
 
@@ -73,11 +76,11 @@ helpers do
     settings.s3_website + image_file + '.jpg'
   end
 
-  def add_logo(image_path)
+  def add_logo(image_path, logo)
     original_image = Magick::Image::read(image_path)[0]
     user_img = original_image.resize_to_fit(500, 500)
 
-    weloveiran_img = Magick::Image::read('static/images/iran-love-israel-01.png')[0]
+    weloveiran_img = Magick::Image::read(logo)[0]
 
     weloveiran_img = resize(user_img, weloveiran_img)
 
@@ -91,6 +94,10 @@ helpers do
     images[1].page = Magick::Rectangle.new(images[1].columns, images[1].rows, 0, posy)
 
     images.flatten_images
+  end
+
+  def logo_in(color_scheme)
+    "static/images/logo-#{color_scheme}.png"
   end
 
   def resize(image, banner)
