@@ -28,9 +28,11 @@ post '/upload' do
   unless params['photo'] && (tempfile = params['photo'][:tempfile])
     redirect '/'
   end
-  
+
   file_name = tempfile.path
-  photo = add_logo(file_name)
+  logo = logo_in(params[:color_scheme])
+
+  photo = add_logo(file_name, logo)
   photo.write(file_name)
   photo_id = flickr.upload_photo file_name, :is_public => false
 
@@ -74,11 +76,11 @@ helpers do
     FlickRaw.url_b(info)
   end
 
-  def add_logo(image_path)
+  def add_logo(image_path, logo)
     original_image = Magick::Image::read(image_path)[0]
     user_img = original_image.resize_to_fit(500, 500)
 
-    weloveiran_img = Magick::Image::read('static/images/iran-love-israel-01.png')[0]
+    weloveiran_img = Magick::Image::read(logo)[0]
 
     weloveiran_img = resize(user_img, weloveiran_img)
 
@@ -92,6 +94,10 @@ helpers do
     images[1].page = Magick::Rectangle.new(images[1].columns, images[1].rows, 0, posy)
 
     images.flatten_images
+  end
+
+  def logo_in(color_scheme)
+    "static/images/logo-#{color_scheme}.png"
   end
 
   def resize(image, banner)
