@@ -3,6 +3,6 @@
 		Your picture was posted on your Facebook profile.
 .show
 	%div
-		%img.user-image{ :src => image_url }
+		%img.user-image{ :src => photo_url }
 	%div
-		%a.btn.btn-large.btn-primary{ :href => "/share/#{image_file}" } Share on Facebook
+		%a.btn.btn-large.btn-primary{ :href => "/share/#{photo_id}" } Share on Facebook
