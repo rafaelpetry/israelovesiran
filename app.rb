@@ -49,7 +49,7 @@ get '/share/:photo_id' do
   redirect client.authorization_uri(:scope => [:publish_stream, :publish_actions])
 end
 
-get '/facebook_callback/:photo_file' do
+get '/facebook_callback/:photo_id' do
   client = FbGraph::Auth.new(settings.fb_app_id, settings.fb_app_secret).client
   client.redirect_uri = callback_url(params[:photo_id])
   client.authorization_code = params[:code]
