@@ -4,12 +4,12 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'sass'
-require 'flickraw'
 require 'digest/sha1'
 require 'uri'
 require 'cgi'
 require 'image_helper.rb'
 require 'facebook_sharing.rb'
+require 'flickr_sharing.rb'
 
 configure do
   set :public_folder, Proc.new { File.join(root, "static") }
@@ -38,18 +38,13 @@ post '/upload' do
   photo = add_logo(file_name, logo)
   photo.write(file_name)
 
-  FlickRaw.api_key = settings.flickr_api_key
-  FlickRaw.shared_secret = settings.flickr_secret
-  flickr.access_token = settings.flickr_access_token
-  flickr.access_secret = settings.flickr_access_secret
-
-  photo_id = flickr.upload_photo file_name, :is_public => false
+  photo_id = flickr.upload file_name
 
   redirect "/show/#{photo_id}"
 end
 
 get '/show/:photo_id' do
-  haml :show, :locals => { :photo_url => photo_url(params[:photo_id]), :photo_id => params[:photo_id] }
+  haml :show, :locals => { :photo_url => flickr.photo_url(params[:photo_id]), :photo_id => params[:photo_id] }
 end
 
 get '/share/facebook/:photo_id' do
@@ -57,9 +52,9 @@ get '/share/facebook/:photo_id' do
 end
 
 get '/facebook_callback/:photo_id' do
-  flickr_photo = photo_url(params[:photo_id])
+  photo = flickr.photo_url(params[:photo_id])
   callback = callback_url(params[:photo_id])
-  facebook.share_photo(flickr_photo, 'Israel Loves Iran', params[:code], callback)
+  facebook.share_photo(photo, 'Israel Loves Iran', params[:code], callback)
   redirect "/show/#{params[:photo_id]}?shared_facebook=1"
 end
 
@@ -71,11 +66,6 @@ end
 helpers do
   def callback_url(photo_id)
     'http://' + request.host_with_port + '/facebook_callback/' + photo_id
-  end
-
-  def photo_url(photo_id)
-    info = flickr.photos.getInfo(:photo_id => photo_id)
-    FlickRaw.url_b(info)
   end
 
   def logo_in(color_scheme)
@@ -90,6 +80,10 @@ helpers do
 
   def facebook
     @facebook_sharing ||= FacebookSharing.new(settings.fb_app_id, settings.fb_app_secret)
+  end
+
+  def flickr
+    @flickr_sharing ||= FlickrSharing.new(settings.flickr_api_key, settings.flickr_secret, settings.flickr_access_token, settings.flickr_access_secret)
   end
 end
 
