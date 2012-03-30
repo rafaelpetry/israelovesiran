@@ -47,12 +47,12 @@ get '/show/:photo_id' do
 end
 
 get '/share/facebook/:photo_id' do
-  redirect facebook.authorization_url(callback_url(params[:photo_id]))
+  redirect facebook.authorization_url(facebook_callback_url(params[:photo_id]))
 end
 
-get '/facebook_callback/:photo_id' do
+get '/callback/facebook/:photo_id' do
   photo = flickr.photo_url(params[:photo_id])
-  callback = callback_url(params[:photo_id])
+  callback = facebook_callback_url(params[:photo_id])
   facebook.share_photo(photo, 'Israel Loves Iran', params[:code], callback)
   redirect "/show/#{params[:photo_id]}?shared_facebook=1"
 end
@@ -63,17 +63,17 @@ get '/stylesheets/styles.css' do
 end
 
 helpers do
-  def callback_url(photo_id)
-    'http://' + request.host_with_port + '/facebook_callback/' + photo_id
-  end
-
   def logo_in(color_scheme)
     "static/images/logo-#{color_scheme}.png"
   end
 
-  def share_to_tumblr_link(photo_url)
+  def facebook_callback_url(photo_id)
+    'http://' + request.host_with_port + '/callback/facebook/' + photo_id
+  end
+
+  def share_to_tumblr_url(photo_url)
     "http://www.tumblr.com/share/photo?source=#{CGI.escape(photo_url)}" +
-      "&caption=#{URI.escape("We Love Iran")}" +
+      "&caption=#{URI.escape("Israel Loves Iran")}" +
       "&click_thru=#{CGI.escape(request.url)}"
   end
 
