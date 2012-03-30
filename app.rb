@@ -5,6 +5,8 @@ require 'haml'
 require 'sass'
 require 'flickraw'
 require 'digest/sha1'
+require 'uri'
+require 'cgi'
 require 'fb_graph'
 require 'RMagick'
 
@@ -102,6 +104,12 @@ helpers do
 
   def resize(image, banner)
     banner.resize_to_fit!(image.columns)
+  end
+
+  def share_to_tumblr_link(photo_url)
+    "http://www.tumblr.com/share/photo?source=#{CGI.escape(photo_url)}" +
+      "&caption=#{URI.escape("We Love Iran")}" +
+      "&click_thru=#{CGI.escape(request.url)}"
   end
 
   def unique_filename
