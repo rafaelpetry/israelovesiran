@@ -9,7 +9,6 @@ require 'digest/sha1'
 require 'uri'
 require 'cgi'
 require 'fb_graph'
-require 'RMagick'
 require 'image_helper.rb'
 
 configure do

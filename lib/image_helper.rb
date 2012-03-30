@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'RMagick'
 
 module Sinatra
   module ImageHelper
