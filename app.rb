@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+$LOAD_PATH << './lib'
 require 'rubygems'
 require 'sinatra'
 require 'haml'
@@ -9,6 +10,7 @@ require 'uri'
 require 'cgi'
 require 'fb_graph'
 require 'RMagick'
+require 'image_helper.rb'
 
 configure do
   set :public_folder, Proc.new { File.join(root, "static") }
@@ -78,32 +80,8 @@ helpers do
     FlickRaw.url_b(info)
   end
 
-  def add_logo(image_path, logo)
-    original_image = Magick::Image::read(image_path)[0]
-    user_img = original_image.resize_to_fit(500, 500)
-
-    weloveiran_img = Magick::Image::read(logo)[0]
-
-    weloveiran_img = resize(user_img, weloveiran_img)
-
-    images = Magick::ImageList.new
-    images << user_img
-    images << weloveiran_img
-
-    max_height = images[0].rows + images[1].rows
-    posy = max_height < 500 ? (images[0].rows - images[1].rows) : (500-images[1].rows)
-
-    images[1].page = Magick::Rectangle.new(images[1].columns, images[1].rows, 0, posy)
-
-    images.flatten_images
-  end
-
   def logo_in(color_scheme)
     "static/images/logo-#{color_scheme}.png"
-  end
-
-  def resize(image, banner)
-    banner.resize_to_fit!(image.columns)
   end
 
   def share_to_tumblr_link(photo_url)
