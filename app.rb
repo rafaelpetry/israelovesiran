@@ -4,12 +4,11 @@ require 'rubygems'
 require 'sinatra'
 require 'haml'
 require 'sass'
-require 'digest/sha1'
 require 'uri'
 require 'cgi'
-require 'image_helper.rb'
-require 'facebook_sharing.rb'
-require 'flickr_sharing.rb'
+require 'image_helper'
+require 'facebook_sharing'
+require 'flickr_sharing'
 
 configure do
   set :public_folder, Proc.new { File.join(root, "static") }
