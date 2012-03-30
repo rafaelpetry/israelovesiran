@@ -7,8 +7,8 @@ require 'sass'
 require 'uri'
 require 'cgi'
 require 'image_helper'
-require 'facebook_sharing'
-require 'flickr_sharing'
+require 'sharing/facebook'
+require 'sharing/flickr'
 
 configure do
   set :public_folder, Proc.new { File.join(root, "static") }
@@ -78,11 +78,11 @@ helpers do
   end
 
   def facebook
-    @facebook_sharing ||= FacebookSharing.new(settings.fb_app_id, settings.fb_app_secret)
+    @facebook_sharing ||= Sharing::Facebook.new(settings.fb_app_id, settings.fb_app_secret)
   end
 
   def flickr
-    @flickr_sharing ||= FlickrSharing.new(settings.flickr_api_key, settings.flickr_secret, settings.flickr_access_token, settings.flickr_access_secret)
+    @flickr_sharing ||= Sharing::Flickr.new(settings.flickr_api_key, settings.flickr_secret, settings.flickr_access_token, settings.flickr_access_secret)
   end
 end
 
