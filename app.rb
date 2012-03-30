@@ -8,8 +8,8 @@ require 'flickraw'
 require 'digest/sha1'
 require 'uri'
 require 'cgi'
-require 'fb_graph'
 require 'image_helper.rb'
+require 'facebook_sharing.rb'
 
 configure do
   set :public_folder, Proc.new { File.join(root, "static") }
@@ -47,20 +47,13 @@ get '/show/:photo_id' do
 end
 
 get '/share/facebook/:photo_id' do
-  client = FbGraph::Auth.new(settings.fb_app_id, settings.fb_app_secret).client
-  client.redirect_uri = callback_url(params[:photo_id])
-  redirect client.authorization_uri(:scope => [:publish_stream, :publish_actions])
+  redirect facebook.authorization_url(callback_url(params[:photo_id]))
 end
 
 get '/facebook_callback/:photo_id' do
-  client = FbGraph::Auth.new(settings.fb_app_id, settings.fb_app_secret).client
-  client.redirect_uri = callback_url(params[:photo_id])
-  client.authorization_code = params[:code]
-  token = client.access_token! :client_auth_body
-
-  user = FbGraph::User.me(token)
-  user.photo!(:url => photo_url(params[:photo_id]), :message => 'Israel Loves Iran')
-
+  flickr_photo = photo_url(params[:photo_id])
+  callback = callback_url(params[:photo_id])
+  facebook.share_photo(flickr_photo, 'Israel Loves Iran', params[:code], callback)
   redirect "/show/#{params[:photo_id]}?shared_facebook=1"
 end
 
@@ -91,6 +84,10 @@ helpers do
 
   def unique_filename
     Digest::SHA1.hexdigest("#{Time.now}#{Time.now.usec}")
+  end
+
+  def facebook
+    @facebook_sharing ||= FacebookSharing.new(settings.fb_app_id, settings.fb_app_secret)
   end
 end
 
