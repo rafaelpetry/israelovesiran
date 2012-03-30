@@ -1,27 +1,26 @@
-.masthead
-  margin-top: 30px
-  margin-bottom: 30px
-  text-align: center
+body
+  background: url(/images/background.gif) repeat top left
+  h1
+    text-align: center
+.editor
 
-.show
-  text-align: center
-  padding-bottom: 30px
+  padding: 30px
+  background: white
+  overflow: hidden
+  width: 800px
+  height: 500px
+  margin: 40px auto 0
+  border-radius: 4px
+  .canvas
+    position: relative
+  .logo-overlay
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 1
+    img
+      width: 300px
 
-.user-image
-  max-width: 500px
-  margin-bottom: 30px
-
-.canvas
-  position: relative
-
-.logo-overlay
-  position: absolute
-  top: 0
-  left: 0
-  z-index: 1
-  img
-    width: 300px
-
-.original-image
-  position: absolute
-  z-index: 0
+  .original-image
+    position: absolute
+    z-index: 0
