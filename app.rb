@@ -14,10 +14,10 @@ require 'facebook_sharing.rb'
 configure do
   set :public_folder, Proc.new { File.join(root, "static") }
 
-  FlickRaw.api_key = ENV['FLICKR_API_KEY']
-  FlickRaw.shared_secret = ENV['FLICKR_SECRET']
-  flickr.access_token = ENV['FLICKR_ACCESS_TOKEN']
-  flickr.access_secret = ENV['FLICKR_ACCESS_SECRET']
+  set :flickr_api_key, ENV['FLICKR_API_KEY']
+  set :flickr_secret, ENV['FLICKR_SECRET']
+  set :flickr_access_token, ENV['FLICKR_ACCESS_TOKEN']
+  set :flickr_access_secret, ENV['FLICKR_ACCESS_SECRET']
 
   set :fb_app_id, ENV['FB_APP_ID']
   set :fb_app_secret, ENV['FB_APP_SECRET']
@@ -37,6 +37,12 @@ post '/upload' do
 
   photo = add_logo(file_name, logo)
   photo.write(file_name)
+
+  FlickRaw.api_key = settings.flickr_api_key
+  FlickRaw.shared_secret = settings.flickr_secret
+  flickr.access_token = settings.flickr_access_token
+  flickr.access_secret = settings.flickr_access_secret
+
   photo_id = flickr.upload_photo file_name, :is_public => false
 
   redirect "/show/#{photo_id}"
