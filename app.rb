@@ -30,10 +30,8 @@ post '/upload' do
   end
 
   file_name = tempfile.path
-  logo = logo_in(params[:color_scheme])
+  photo = resize_to_fit!(file_name, 500)
 
-  photo = add_logo(file_name, logo)
-  photo.write(file_name)
   photo_id = flickr.upload_photo file_name, :is_public => false
 
   redirect "/show/#{photo_id}"
@@ -76,32 +74,10 @@ helpers do
     FlickRaw.url_b(info)
   end
 
-  def add_logo(image_path, logo)
+  def resize_to_fit!(image_path, maximum_size)
     original_image = Magick::Image::read(image_path)[0]
-    user_img = original_image.resize_to_fit(500, 500)
-
-    weloveiran_img = Magick::Image::read(logo)[0]
-
-    weloveiran_img = resize(user_img, weloveiran_img)
-
-    images = Magick::ImageList.new
-    images << user_img
-    images << weloveiran_img
-
-    max_height = images[0].rows + images[1].rows
-    posy = max_height < 500 ? (images[0].rows - images[1].rows) : (500-images[1].rows)
-
-    images[1].page = Magick::Rectangle.new(images[1].columns, images[1].rows, 0, posy)
-
-    images.flatten_images
-  end
-
-  def logo_in(color_scheme)
-    "static/images/logo-#{color_scheme}.png"
-  end
-
-  def resize(image, banner)
-    banner.resize_to_fit!(image.columns)
+    original_image.resize_to_fit!(maximum_size, maximum_size)
+    original_image.write(image_path)
   end
 
   def unique_filename

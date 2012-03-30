@@ -4,17 +4,5 @@
 		%label.control-label Photo
 		.controls
 			%input.input-file{ :type => 'file', :name => 'photo' }
-	.control-group
-		%label.control-label Color scheme
-		.controls
-			%label.radio
-				%input{ :type => 'radio', :name => 'color_scheme', :value => 'green-orange', :checked => 'checked' }
-				Green/Orange
-			%label.radio
-				%input{ :type => 'radio', :name => 'color_scheme', :value => 'green-purple' }
-				Green/Purple
-			%label.radio
-				%input{ :type => 'radio', :name => 'color_scheme', :value => 'green-blue' }
-				Green/Blue
 	.form-actions
 		%button.btn.btn-primary{ :type => 'submit' } Upload
