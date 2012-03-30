@@ -82,10 +82,6 @@ helpers do
       "&click_thru=#{CGI.escape(request.url)}"
   end
 
-  def unique_filename
-    Digest::SHA1.hexdigest("#{Time.now}#{Time.now.usec}")
-  end
-
   def facebook
     @facebook_sharing ||= FacebookSharing.new(settings.fb_app_id, settings.fb_app_secret)
   end
