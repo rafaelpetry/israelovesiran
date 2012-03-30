@@ -43,7 +43,7 @@ get '/show/:photo_id' do
   haml :show, :locals => { :photo_url => photo_url(params[:photo_id]), :photo_id => params[:photo_id] }
 end
 
-get '/share/:photo_id' do
+get '/share/facebook/:photo_id' do
   client = FbGraph::Auth.new(settings.fb_app_id, settings.fb_app_secret).client
   client.redirect_uri = callback_url(params[:photo_id])
   redirect client.authorization_uri(:scope => [:publish_stream, :publish_actions])
@@ -58,7 +58,7 @@ get '/facebook_callback/:photo_id' do
   user = FbGraph::User.me(token)
   user.photo!(:url => photo_url(params[:photo_id]), :message => 'Israel Loves Iran')
 
-  redirect "/show/#{params[:photo_id]}?shared=1"
+  redirect "/show/#{params[:photo_id]}?shared_facebook=1"
 end
 
 get '/stylesheets/styles.css' do

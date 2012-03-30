@@ -1,8 +1,8 @@
-- if params[:shared]
+- if params[:shared_facebook]
 	.alert.alert-success
 		Your picture was posted on your Facebook profile.
 .show
 	%div
 		%img.user-image{ :src => photo_url }
 	%div
-		%a.btn.btn-large.btn-primary{ :href => "/share/#{photo_id}" } Share on Facebook
+		%a.btn.btn-large.btn-primary{ :href => "/share/facebook/#{photo_id}" } Share on Facebook
