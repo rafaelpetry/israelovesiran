@@ -3,18 +3,52 @@ body
   font-size: 14px
   margin: 0
   padding: 0
+  border-top: 3px solid #EA3B94
   .wrapper
-    width: 960px
+    width: 860px
     margin: 0 auto
     text-align: center
 fieldset
   border: 0 none
 .logo
-  margin: 20px auto
+  margin: 20px 0
   background: url(/images/logo.jpg) no-repeat scroll top left
   width: 300px
   height: 178px
   text-indent: -9999em
+  float: left
+.codepink
+  float: right
+  margin-right: 100px
+  margin-top: 40px
+.header
+  overflow: hidden
+.callout
+  margin-top: 40px
+  margin-left: 140px
+  text-align: left
+  padding-bottom: 0
+  p
+    position: relative
+    line-height: 3em
+    font-size: 24px
+  p + p
+    margin-left: 1em
+  p + p + p
+    margin-left: 2em
+  span
+    font-size: 60px
+    font-family: Georgia, serif
+    font-style: italic
+    font-weight: 100
+    white-space: nowrap
+    color: #EA3B94
+    position: absolute
+    top: -10px
+    left: -140px
+    letter-spacing: -4px
+.choose-picture
+  margin: 40px 0
 .controls
   text-align: center
   label
@@ -44,3 +78,9 @@ fieldset
       background-position: -669px -10px
 .generate
   margin-top: 30px
+
+.btn-primary
+  background: #00B062
+  &:hover, &:focus, &:active
+    background: #00D082
+

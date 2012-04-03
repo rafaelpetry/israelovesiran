@@ -1,28 +1,24 @@
 %form{ :action => '/upload', :method => 'post', :enctype => "multipart/form-data" }
-  %fieldset
-    %legend 
-    .choose-picture
-      %h2 Choose a picture
-      %label{:for => 'choose-picture'} Select an image from your computer
-      %br
-      %input#choose-picture{ :type => 'file', :name => 'photo'}
-    .color-picker
-      %h2 Pick a color
-      .controls
-        %label.orange
-          %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-orange', :checked => 'checked' }
-          Green/Orange
-        %label.purple
-          %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-purple' }
-          Green/Purple
-        %label.pink
-          %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-pink' }
-          Green/Pink
-        %label.blue
-          %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-blue' }
-          Green/Blue
-    .generate.jumbotron
-      %button.btn.btn-primary.btn-large{ :type => 'submit' } Generate my action image!
+  .choose-picture
+    %h2 Upload a picture
+    %input#choose-picture{ :type => 'file', :name => 'photo'}
+  .color-picker
+    %h2 Pick a color
+    .controls
+      %label.orange
+        %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-orange', :checked => 'checked' }
+        Green/Orange
+      %label.purple
+        %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-purple' }
+        Green/Purple
+      %label.pink
+        %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-pink' }
+        Green/Pink
+      %label.blue
+        %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-blue' }
+        Green/Blue
+  .generate.jumbotron
+    %button.btn.btn-primary.btn-large{ :type => 'submit' } Generate your image!
 :javascript
   $(function() {
     $('.controls label input[type="radio"]').click(function() {

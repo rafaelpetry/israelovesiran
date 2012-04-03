@@ -8,6 +8,16 @@
     %script{ :type => 'text/javascript', :src => '/javascripts/bootstrap.min.js' }
   %body
     .wrapper
-      .logo
-        %h1 Israel Loves Iran
+      .header
+        %img.codepink{:src => '/images/codepink-women-say-no-war-on-iran.jpg' }
+        .callout
+          %p
+            %span step 1
+            Select a picture
+          %p
+            %span step 2
+            Choose a color for the message
+          %p
+            %span step 3
+            Share your image with the world!
       = yield
