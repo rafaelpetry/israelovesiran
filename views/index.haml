@@ -24,8 +24,9 @@
     .generate.jumbotron
       %button.btn.btn-primary.btn-large{ :type => 'submit' } Generate my action image!
 :javascript
-  $(function () {
-    $('.controls label').click(function() {
-      $(this).toggleClass('active');
-    })
+  $(function() {
+    $('.controls label input[type="radio"]').click(function() {
+      $('.controls label').removeClass('active');
+      $(this).parent('label').addClass('active');
+    });
   });

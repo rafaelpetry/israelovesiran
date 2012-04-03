@@ -10,10 +10,10 @@ body
 fieldset
   border: 0 none
 .logo
-  margin: 0 auto
-  background: url(/images/logo.gif) no-repeat scroll top left
-  width: 200px
-  height: 100px
+  margin: 20px auto
+  background: url(/images/logo.jpg) no-repeat scroll top left
+  width: 300px
+  height: 178px
   text-indent: -9999em
 .controls
   text-align: center
@@ -26,9 +26,11 @@ fieldset
     display: inline-block
     cursor: pointer
     color: transparent
-    margin: 0 10px 10px 0
+    margin: 0 10px 0 0
     opacity: 0.3
-    &:hover, .active
+    &:hover
+      opacity: 0.6
+    &.active
       opacity: 1
     input[type='radio']
       visibility: hidden
@@ -40,3 +42,5 @@ fieldset
       background-position: -450px -10px
     &.blue
       background-position: -669px -10px
+.generate
+  margin-top: 30px
