@@ -57,7 +57,7 @@ end
 get '/callback/facebook/:photo_id' do
   photo = flickr.photo_url(params[:photo_id])
   callback = facebook_callback_url(params[:photo_id])
-  facebook.share_photo(photo, 'Israel Loves Iran', params[:code], callback)
+  facebook.share_photo(photo, 'We Love Iran', params[:code], callback)
   session[:success] = "Your picture was posted on your Facebook profile."
   redirect "/show/#{params[:photo_id]}"
 end

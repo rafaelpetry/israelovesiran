@@ -8,7 +8,7 @@ module Sinatra
     private
 
     def twitter_message(photo_url)
-      URI.escape("Iranians, we will never bomb your country. We love you. #{tinyUrl(photo_url)} #israeloveiran")
+      URI.escape("Iranians, we will never bomb your country. We love you. #{tinyUrl(photo_url)} #weloveiran @codepink")
     end
   end
 
