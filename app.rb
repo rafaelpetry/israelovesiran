@@ -10,6 +10,8 @@ require 'helpers/application_helper'
 require 'helpers/image_helper'
 
 configure do
+  enable :sessions
+
   set :public_folder, Proc.new { File.join(root, "static") }
 
   set :flickr_api_key, ENV['FLICKR_API_KEY']
@@ -26,7 +28,10 @@ get '/' do
 end
 
 post '/upload' do
-  redirect '/' unless is_an_image?(params[:photo])
+  unless is_an_image? params[:photo]
+    session[:error] = "Please, upload an image"
+    redirect '/'
+  end
 
   tempfile = params['photo'][:tempfile]
   file_name = tempfile.path
@@ -51,7 +56,8 @@ get '/callback/facebook/:photo_id' do
   photo = flickr.photo_url(params[:photo_id])
   callback = facebook_callback_url(params[:photo_id])
   facebook.share_photo(photo, 'Israel Loves Iran', params[:code], callback)
-  redirect "/show/#{params[:photo_id]}?shared_facebook=1"
+  session[:success] = "Your picture was posted on your Facebook profile."
+  redirect "/show/#{params[:photo_id]}"
 end
 
 get '/stylesheets/styles.css' do

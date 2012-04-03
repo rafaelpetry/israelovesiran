@@ -8,6 +8,13 @@
     %script{ :type => 'text/javascript', :src => '/javascripts/bootstrap.min.js' }
   %body
     .wrapper
+      - if session[:error]
+        .alert.alert-error
+          = session[:error]
+      - if session[:success]
+        .alert.alert-success
+          = session[:success]
+      - session.clear
       .logo
         %h1 Israel Loves Iran
       = yield

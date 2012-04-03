@@ -1,9 +1,6 @@
-- if params[:shared_facebook]
-	.alert.alert-success
-		Your picture was posted on your Facebook profile.
 .show
-	%div
-		%img.user-image{ :src => photo_url }
-	%div
-		%a.btn.btn-large.btn-primary{ :href => "/share/facebook/#{photo_id}" } Share on Facebook
-		%a.btn.btn-large.btn-primary{ :onclick => "window.open('#{share_to_tumblr_url(photo_url)}', 't', 'toolbar=0,resizable=0,status=1,width=450,height=430')" } Share on Tumblr
+  %div
+    %img.user-image{ :src => photo_url }
+  %div
+    %a.btn.btn-large.btn-primary{ :href => "/share/facebook/#{photo_id}" } Share on Facebook
+    %a.btn.btn-large.btn-primary{ :onclick => "window.open('#{share_to_tumblr_url(photo_url)}', 't', 'toolbar=0,resizable=0,status=1,width=450,height=430')" } Share on Tumblr
