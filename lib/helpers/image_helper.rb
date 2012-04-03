@@ -36,7 +36,7 @@ module Sinatra
     end
 
     def logo_in(color_scheme)
-      "static/images/logo-#{color_scheme}.png"
+      "static/images/banners/#{color_scheme}.png"
     end
 
     def position_logo!(images)
