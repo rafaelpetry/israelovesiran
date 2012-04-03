@@ -10,7 +10,7 @@ module Sharing
     end
 
     def upload(file_name)
-      client.upload_photo file_name, :is_public => false
+      client.upload_photo file_name, :is_public => false, :tags => 'weloveiran'
     end
 
     def photo_url(photo_id)
