@@ -8,6 +8,8 @@ require 'uri'
 require 'cgi'
 require 'helpers/application_helper'
 require 'helpers/image_helper'
+require 'helpers/twitter_helper'
+require 'helpers/url_helper'
 
 configure do
   enable :sessions

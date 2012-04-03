@@ -1,9 +1,9 @@
-require 'sinatra/base'
 require 'sharing/facebook'
 require 'sharing/flickr'
 
 module Sinatra
   module ApplicationHelper
+
     def facebook_callback_url(photo_id)
       'http://' + request.host_with_port + '/callback/facebook/' + photo_id
     end
