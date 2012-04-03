@@ -23,6 +23,11 @@ module Sinatra
       images.flatten_images
     end
 
+    def is_an_image?(photo)
+      photo && (photo[:type] =~ /image\/.+/)
+    end
+
+    private
     def resize(image, banner)
       max_size = image.columns
       max_size *= 0.3 if landscape? image

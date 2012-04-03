@@ -26,11 +26,11 @@ get '/' do
 end
 
 post '/upload' do
-  unless params['photo'] && (tempfile = params['photo'][:tempfile])
-    redirect '/'
-  end
+  redirect '/' unless is_an_image?(params[:photo])
 
+  tempfile = params['photo'][:tempfile]
   file_name = tempfile.path
+
   photo = add_logo(file_name, params[:color_scheme])
   photo.write(file_name)
 
