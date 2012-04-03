@@ -1,3 +1,5 @@
+require 'uri'
+require 'cgi'
 require 'sharing/facebook'
 require 'sharing/flickr'
 
