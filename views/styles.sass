@@ -1,12 +1,42 @@
-.masthead
-	margin-top: 30px
-	margin-bottom: 30px
-	text-align: center
-
-.show
-	text-align: center
-	padding-bottom: 30px
-
-.user-image
-	max-width: 500px
-	margin-bottom: 30px
+body
+  font-family: 'Lucida Grande', 'Lucida Sans Unicode', sans-serif
+  font-size: 14px
+  margin: 0
+  padding: 0
+  .wrapper
+    width: 960px
+    margin: 0 auto
+    text-align: center
+fieldset
+  border: 0 none
+.logo
+  margin: 0 auto
+  background: url(/images/logo.gif) no-repeat scroll top left
+  width: 200px
+  height: 100px
+  text-indent: -9999em
+.controls
+  text-align: center
+  label
+    background-image: url('/images/thumbs.jpg')
+    background-repeat: no-repeat
+    background-attachment: scroll
+    width: 182px
+    height: 108px
+    display: inline-block
+    cursor: pointer
+    color: transparent
+    margin: 0 10px 10px 0
+    opacity: 0.3
+    &:hover, .active
+      opacity: 1
+    input[type='radio']
+      visibility: hidden
+    &.orange
+      background-position: -10px -10px
+    &.purple
+      background-position: -230px -10px
+    &.pink
+      background-position: -450px -10px
+    &.blue
+      background-position: -669px -10px
