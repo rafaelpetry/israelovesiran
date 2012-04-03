@@ -3,28 +3,47 @@ require 'RMagick'
 
 module Sinatra
   module ImageHelper
-    def add_logo(image_path, logo)
+    MAXIMUM_SIZE = 500
+
+    def add_logo(image_path, color_scheme)
+      logo = logo_in(color_scheme)
+
       original_image = Magick::Image::read(image_path)[0]
-      user_img = original_image.resize_to_fit(500, 500)
+      user_img = original_image.resize_to_fit(MAXIMUM_SIZE, MAXIMUM_SIZE)
 
       weloveiran_img = Magick::Image::read(logo)[0]
-
       weloveiran_img = resize(user_img, weloveiran_img)
 
       images = Magick::ImageList.new
       images << user_img
       images << weloveiran_img
 
-      max_height = images[0].rows + images[1].rows
-      posy = max_height < 500 ? (images[0].rows - images[1].rows) : (500-images[1].rows)
-
-      images[1].page = Magick::Rectangle.new(images[1].columns, images[1].rows, 0, posy)
+      position_logo!(images)
 
       images.flatten_images
     end
 
     def resize(image, banner)
-      banner.resize_to_fit!(image.columns)
+      max_size = image.columns
+      max_size *= 0.3 if landscape? image
+
+      banner.resize_to_fit!(max_size)
+    end
+
+    def logo_in(color_scheme)
+      "static/images/logo-#{color_scheme}.png"
+    end
+
+    def position_logo!(images)
+      x = images[0].columns - images[1].columns
+      y = images[0].rows - images[1].rows
+
+      images[1].page = Magick::Rectangle.new(images[1].columns, images[1].rows, x, y)
+      images
+    end
+
+    def landscape?(image)
+      image.columns > image.rows
     end
   end
 

@@ -4,10 +4,6 @@ require 'sharing/flickr'
 
 module Sinatra
   module ApplicationHelper
-    def logo_in(color_scheme)
-      "static/images/logo-#{color_scheme}.png"
-    end
-
     def facebook_callback_url(photo_id)
       'http://' + request.host_with_port + '/callback/facebook/' + photo_id
     end

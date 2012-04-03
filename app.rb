@@ -31,9 +31,7 @@ post '/upload' do
   end
 
   file_name = tempfile.path
-  logo = logo_in(params[:color_scheme])
-
-  photo = add_logo(file_name, logo)
+  photo = add_logo(file_name, params[:color_scheme])
   photo.write(file_name)
 
   photo_id = flickr.upload file_name
