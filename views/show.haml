@@ -1,6 +1,6 @@
 .show
   %div
     %img.user-image{ :src => photo_url }
-  %div
+  %div.jumbotron
     %a.btn.btn-large.btn-primary{ :href => "/share/facebook/#{photo_id}" } Share on Facebook
     %a.btn.btn-large.btn-primary{ :onclick => "window.open('#{share_to_tumblr_url(photo_url)}', 't', 'toolbar=0,resizable=0,status=1,width=450,height=430')" } Share on Tumblr
