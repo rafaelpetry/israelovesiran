@@ -5,17 +5,17 @@
   .color-picker
     %h2 Pick a color
     .controls
-      %label.orange
-        %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-orange', :checked => 'checked' }
+      %label.orange.active
+        %input{ :type => 'radio', :name => 'color_scheme', :value => 'orange', :checked => 'checked' }
         Green/Orange
       %label.purple
-        %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-purple' }
+        %input{ :type => 'radio', :name => 'color_scheme', :value => 'purple' }
         Green/Purple
       %label.pink
-        %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-pink' }
+        %input{ :type => 'radio', :name => 'color_scheme', :value => 'pink' }
         Green/Pink
       %label.blue
-        %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-blue' }
+        %input{ :type => 'radio', :name => 'color_scheme', :value => 'blue' }
         Green/Blue
   .generate.jumbotron
     %button.btn.btn-primary.btn-large{ :type => 'submit' } Generate your image!
@@ -24,5 +24,10 @@
     $('.controls label input[type="radio"]').click(function() {
       $('.controls label').removeClass('active');
       $(this).parent('label').addClass('active');
+    });
+
+    $('input#choose-picture').on("change", function () {
+      $('div.color-picker').show();
+      $('div.generate').show();
     });
   });
