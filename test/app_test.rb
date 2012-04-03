@@ -12,7 +12,7 @@ class AppTest < Test::Unit::TestCase
   def test_root_should_present_the_submit_form
     get '/'
     assert last_response.ok?
-    assert_match /Add the campaign logo to your photo/, last_response.body
+    assert_match /Share your image with the world/, last_response.body
   end
 
   def test_upload_should_redirect_back_to_root_without_photo
