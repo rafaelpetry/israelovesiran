@@ -9,7 +9,7 @@
     .color-picker
       %h2 Pick a color
       .controls
-        %label.orange
+        %label.orange.active
           %input{ :type => 'radio', :name => 'color_scheme', :value => 'green-orange', :checked => 'checked' }
           Green/Orange
         %label.purple
@@ -28,5 +28,10 @@
     $('.controls label input[type="radio"]').click(function() {
       $('.controls label').removeClass('active');
       $(this).parent('label').addClass('active');
+    });
+
+    $('input#choose-picture').on("change", function () {
+      $('div.color-picker').show();
+      $('div.generate').show();
     });
   });
