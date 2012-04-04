@@ -10,6 +10,7 @@ module Sinatra
 
       original_image = Magick::Image::read(image_path)[0]
       user_img = original_image.resize_to_fit(MAXIMUM_SIZE, MAXIMUM_SIZE)
+      fix_orientation!(user_img)
 
       weloveiran_img = Magick::Image::read(logo)[0]
       weloveiran_img = resize(user_img, weloveiran_img)
@@ -35,6 +36,21 @@ module Sinatra
       banner.resize_to_fit!(max_size)
     end
 
+    def fix_orientation!(image)
+      orientation = image.get_exif_by_entry('Orientation')[0][1].to_i
+
+      case (orientation)
+      when 3
+        image.rotate!(180)
+      when 6
+        image.rotate!(90)
+      when 8
+        image.rotate!(-90)
+      end
+
+      image
+    end
+
     def logo_in(color_scheme)
       "static/images/banners/#{color_scheme}.png"
     end
@@ -52,9 +68,6 @@ module Sinatra
     end
 
     def landscape?(image)
-      orientation = image.get_exif_by_entry('Orientation')
-      return orientation >= 5 if orientation
-
       image.columns > image.rows
     end
   end
