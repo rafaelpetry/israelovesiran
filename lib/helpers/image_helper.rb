@@ -28,7 +28,7 @@ module Sinatra
     private
     def resize(image, banner, banner_path)
       max_size = image[:width]
-      max_size *= 0.3 if round?(banner_path) || landscape?(image)
+      max_size *= 0.3 if round?(banner_path) || use_small_logo?(image)
 
       banner.resize "#{max_size}x#{max_size}"
     end
@@ -41,8 +41,9 @@ module Sinatra
       banner_path =~ /round\.png/
     end
 
-    def landscape?(image)
-      image[:width] > image[:height]
+    def use_small_logo?(image)
+      ratio = image[:width].to_f / image[:height]
+      ratio > 0.75
     end
   end
 
