@@ -11,4 +11,5 @@ gem 'rake', '~> 0.9.2'
 
 group :development, :test do
       gem 'pry'
+      gem 'simplecov'
 end
