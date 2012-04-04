@@ -52,6 +52,9 @@ module Sinatra
     end
 
     def landscape?(image)
+      orientation = image.get_exif_by_entry('Orientation')
+      return orientation >= 5 if orientation
+
       image.columns > image.rows
     end
   end
