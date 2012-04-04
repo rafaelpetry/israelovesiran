@@ -12,7 +12,7 @@ module Sinatra
 
     def share_to_tumblr_url(photo_url)
       "http://www.tumblr.com/share/photo?source=#{CGI.escape(photo_url)}" +
-        "&caption=#{URI.escape("We Love Iran")}" +
+        "&caption=#{URI.escape("I love Iranians. Do you? Join me at http://www.weloveiran.org")}" +
         "&click_thru=#{CGI.escape(request.url)}"
     end
 
