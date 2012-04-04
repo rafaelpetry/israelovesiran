@@ -23,6 +23,10 @@ configure do
   set :fb_app_secret, ENV['FB_APP_SECRET']
 end
 
+configure :production do
+  require 'newrelic_rpm'
+end
+
 get '/' do
   haml :index
 end

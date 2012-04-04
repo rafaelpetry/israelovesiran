@@ -8,6 +8,7 @@ gem 'fb_graph', '~> 2.4.7'
 gem 'rmagick', '~> 2.13.1'
 gem 'rack-test', '~> 0.6.1'
 gem 'rake', '~> 0.9.2'
+gem 'newrelic_rpm'
 
 group :development, :test do
       gem 'pry'
