@@ -1,27 +1,24 @@
 require 'sinatra/base'
-require 'RMagick'
+require 'mini_magick'
 
 module Sinatra
   module ImageHelper
     MAXIMUM_SIZE = 500
 
     def add_logo(image_path, color_scheme)
-      logo = logo_in(color_scheme)
+      user_img = MiniMagick::Image.open(image_path)
+      user_img.resize "#{MAXIMUM_SIZE}x#{MAXIMUM_SIZE}"
+      user_img.auto_orient
 
-      original_image = Magick::Image::read(image_path)[0]
-      user_img = original_image.resize_to_fit(MAXIMUM_SIZE, MAXIMUM_SIZE)
-      fix_orientation!(user_img)
+      logo_path = logo_in(color_scheme)
+      weloveiran_img = MiniMagick::Image.open(logo_path)
+      resize(user_img, weloveiran_img, logo_path)
 
-      weloveiran_img = Magick::Image::read(logo)[0]
-      weloveiran_img = resize(user_img, weloveiran_img)
+      result = user_img.composite(weloveiran_img) do |c|
+        c.gravity "Southeast"
+      end
 
-      images = Magick::ImageList.new
-      images << user_img
-      images << weloveiran_img
-
-      position_logo!(images)
-
-      images.flatten_images
+      result
     end
 
     def is_an_image?(photo)
@@ -29,46 +26,23 @@ module Sinatra
     end
 
     private
-    def resize(image, banner)
-      max_size = image.columns
-      max_size *= 0.3 if round?(banner) || landscape?(image)
+    def resize(image, banner, banner_path)
+      max_size = image[:width]
+      max_size *= 0.3 if round?(banner_path) || landscape?(image)
 
-      banner.resize_to_fit!(max_size)
-    end
-
-    def fix_orientation!(image)
-      orientation = image.get_exif_by_entry('Orientation')[0][1].to_i
-
-      case (orientation)
-      when 3
-        image.rotate!(180)
-      when 6
-        image.rotate!(90)
-      when 8
-        image.rotate!(-90)
-      end
-
-      image
+      banner.resize "#{max_size}x#{max_size}"
     end
 
     def logo_in(color_scheme)
       "static/images/banners/#{color_scheme}.png"
     end
 
-    def position_logo!(images)
-      x = images[0].columns - images[1].columns
-      y = images[0].rows - images[1].rows
-
-      images[1].page = Magick::Rectangle.new(images[1].columns, images[1].rows, x, y)
-      images
-    end
-
-    def round?(banner)
-      banner.filename =~ /round\.png/
+    def round?(banner_path)
+      banner_path =~ /round\.png/
     end
 
     def landscape?(image)
-      image.columns > image.rows
+      image[:width] > image[:height]
     end
   end
 
