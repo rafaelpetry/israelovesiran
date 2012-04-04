@@ -1,12 +1,13 @@
 !!!
 %html
   %head
-    %title Israel Loves Iran &mdash; Join the campaign
+    %title WE LOVE IRAN &mdash; Join the campaign
+    %meta{ :charset => 'utf-8' }
     %link{ :rel => 'stylesheet', :href => '/stylesheets/bootstrap.min.css', :type => 'text/css' }
     %link{ :rel => 'stylesheet', :href => '/stylesheets/styles.css', :type => 'text/css' }
     %script{ :type => 'text/javascript', :src => '/javascripts/zepto.min.js' }
     %script{ :type => 'text/javascript', :src => '/javascripts/bootstrap.min.js' }
-  %body
+  %body.pink
     .wrapper
       - if session[:error]
         .alert.alert-error
@@ -16,15 +17,25 @@
           = session[:success]
       - session.clear
       .header
-        %img.codepink{:src => '/images/codepink-women-say-no-war-on-iran.jpg' }
-        .callout
+        %h1 Iranians We Love You!
+        %img#codepink-banner{ :src => '/images/banners/pink-round.png' }
+        .call-to-action
           %p
-            %span step 1
-            Select a picture
-          %p
-            %span step 2
-            Choose a color for the message
-          %p
-            %span step 3
-            Share your image with the world!
-      = yield
+            In March Israeli graphic designer and teacher Ronny Edri posted a picture of himself and his daughter to facebook with the message:
+            %b "Iranians we love you. We will never bomb your country."
+            The
+            %a{:href => 'http://www.israelovesiran.com/', :target => '_blank'} campaign
+            took off - within hours Iranians sent beautiful images back and messages have been sent from all over the world.
+          %p.highlight
+            Will you add your picture to the global call for love not war?
+      .editor-instructions
+        %img.thumbs{:src => '/images/thumbs.png'}
+        %p
+          Create and share your photo using the tool from
+          %a.codepink{:href => 'http://www.codepink.org', :target => '_blank'} CODEPINK
+          below and join Alice Walker, Eve Ensler and Gloria Steinem in signing onto a
+          %a{:href => 'http://j.mp/GAxy0I', :target => '_blank'} petition
+          to say no to war.
+      .image-editor= yield
+      .footer
+        %p © 2012 <a href="http://codepink.org">codepink.org</a>
