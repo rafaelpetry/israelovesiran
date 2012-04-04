@@ -30,7 +30,7 @@ module Sinatra
     private
     def resize(image, banner)
       max_size = image.columns
-      max_size *= 0.3 if landscape? image
+      max_size *= 0.3 if round?(banner) || landscape?(image)
 
       banner.resize_to_fit!(max_size)
     end
@@ -45,6 +45,10 @@ module Sinatra
 
       images[1].page = Magick::Rectangle.new(images[1].columns, images[1].rows, x, y)
       images
+    end
+
+    def round?(banner)
+      banner.filename =~ /round\.png/
     end
 
     def landscape?(image)
