@@ -11,19 +11,22 @@
       %label.purple
         %input{ :type => 'radio', :name => 'color_scheme', :value => 'purple' }
         Green/Purple
-      %label.blue
-        %input{ :type => 'radio', :name => 'color_scheme', :value => 'blue' }
-        Green/Blue
       %label.orange
         %input{ :type => 'radio', :name => 'color_scheme', :value => 'orange' }
         Green/Orange
-  .generate.jumbotron
+      %label.round-pink
+        %input{ :type => 'radio', :name => 'color_scheme', :value => 'pink-round' }
+        Round/Pink
+  .generate
     %button.btn.btn-primary.btn-large{ :type => 'submit' } Generate your image!
 :javascript
   $(function() {
     $('.controls label input[type="radio"]').click(function () {
       $('.controls label').removeClass('active');
       $(this).parent('label').addClass('active');
+      // this is the cherry on the top
+      $('body').removeAttr('class');
+      $('body').addClass($(this).val());
     });
     $('input#choose-picture').on("change", function () {
       $('div.color-picker').show();

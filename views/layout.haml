@@ -2,11 +2,12 @@
 %html
   %head
     %title WE LOVE IRAN &mdash; Join the campaign
+    %meta{ :charset => 'utf-8' }
     %link{ :rel => 'stylesheet', :href => '/stylesheets/bootstrap.min.css', :type => 'text/css' }
     %link{ :rel => 'stylesheet', :href => '/stylesheets/styles.css', :type => 'text/css' }
     %script{ :type => 'text/javascript', :src => '/javascripts/zepto.min.js' }
     %script{ :type => 'text/javascript', :src => '/javascripts/bootstrap.min.js' }
-  %body
+  %body.pink
     .wrapper
       - if session[:error]
         .alert.alert-error

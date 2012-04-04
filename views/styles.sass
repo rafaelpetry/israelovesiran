@@ -4,9 +4,20 @@ body
   font-size: 18px
   margin: 0
   padding: 0
-  border-top: 5px solid #F09
   text-align: center
   padding-bottom: 30px
+  &.pink, &.pink-round
+    border-top: 5px solid #F09
+    .footer
+      border-bottom: 5px solid #F09
+  &.purple
+    border-top: 5px solid #652d90
+    .footer
+      border-bottom: 5px solid #652d90
+  &.orange
+    border-top: 5px solid #f6931e
+    .footer
+      border-bottom: 5px solid #f6931e
   .wrapper
     width: 860px
     margin: 0 auto
@@ -77,10 +88,11 @@ fieldset
     background-attachment: scroll
     width: 182px
     height: 108px
-    display: inline-block
+    display: block
+    float: left
     cursor: pointer
     color: transparent
-    margin: 0 10px 0 0
+    margin: 40px 10px 0 0
     opacity: 0.3
     &:hover
       opacity: 0.6
@@ -94,8 +106,11 @@ fieldset
       background-position: -230px -10px
     &.pink
       background-position: -450px -10px
-    &.blue
-      background-position: -669px -10px
+    &.round-pink
+      background: url(/images/banners/pink-round.png) no-repeat scroll top left
+      width: 200px
+      height: 200px
+      margin-top: 0
 
 .generate
   display: none
@@ -132,7 +147,6 @@ fieldset
   left: 0
   font-size: 12px
   width: 100%
-  border-bottom: 5px solid #F09
 
 .thumbs
   float: right
