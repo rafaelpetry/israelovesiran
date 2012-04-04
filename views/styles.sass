@@ -1,51 +1,76 @@
 body
-  font-family: 'Lucida Grande', 'Lucida Sans Unicode', sans-serif
-  font-size: 14px
+  background: url('/images/i-am-a-background-texture.gif') repeat scroll top left
+  font-family: sans-serif
+  font-size: 18px
   margin: 0
   padding: 0
-  border-top: 3px solid #EA3B94
+  border-top: 5px solid #F09
+  text-align: center
+  padding-bottom: 30px
   .wrapper
     width: 860px
     margin: 0 auto
-    text-align: center
+  a
+    color: #F09
+    &:hover
+      color: #F0A
+      text-decoration: underline
+    &:active,
+    &:focus
+      text-decoration: none
+      color: #F08
+  p
+    font-size: 14px
+    line-height: 21px
 fieldset
   border: 0 none
-.codepink
-  float: right
-  margin-right: 100px
-  margin-top: 40px
 .header
+  padding: 40px 0
   overflow: hidden
-.callout
-  margin-top: 40px
-  margin-left: 140px
-  text-align: left
-  padding-bottom: 0
+  h1
+    font-size: 70px
+    font-weight: 900
+    color: #00B062
+    margin-bottom: 30px
+#codepink-banner
+  float: right
+
+.call-to-action
+  float: left
+  width: 600px
+  padding-top: 18px
+  margin-left: 40px
+  text-align: center
   p
-    position: relative
-    line-height: 3em
-    font-size: 24px
-  p + p
-    margin-left: 1em
-  p + p + p
-    margin-left: 2em
-  span
-    font-size: 60px
-    font-family: Georgia, serif
-    font-style: italic
-    font-weight: 100
-    white-space: nowrap
-    color: #EA3B94
-    position: absolute
-    top: -10px
-    left: -140px
-    letter-spacing: -4px
+    font-size: 17px
+    line-height: 24px
+    color: #555
+    text-shadow: #fff 0 1px 0
+    &.highlight
+      background: #F09
+      text-shadow: rgba(0,0,0,.5) 0 -1px 0
+      color: white
+      padding: 8px
+      margin: 0 40px
+      font-weight: 900
+.editor-instructions
+  overflow: hidden
+  p
+    width: 400px
+    float: left
+    margin-top: 50px
+    font-size: 20px
+    line-height: 30px
+  img
+    float: right
+
 .choose-picture
   margin: 40px 0
+
 .color-picker
   display: none
+
 .controls
-  text-align: center
   label
     background-image: url('/images/thumbs.jpg')
     background-repeat: no-repeat
@@ -71,12 +96,43 @@ fieldset
       background-position: -450px -10px
     &.blue
       background-position: -669px -10px
+
 .generate
   display: none
 
+// overwrite tw bootstrap colors
 .btn-primary
   margin-top: 30px
   background: #00B062
-  &:hover, &:focus, &:active
+  &:hover,
+  &:focus,
+  &:active
     background: #00D082
 
+.image-editor
+  background: white
+  padding: 20px
+  margin: 20px 5px
+  border: 1px solid #EEE
+  -moz-border-radius: 6px
+  -webkit-border-radius: 6px
+  border-radius: 6px
+  -moz-box-shadow: rgba(0,0,0,.4) 0 2px 2px
+  -webkit-box-shadow: rgba(0,0,0,.4) 0 2px 2px
+  box-shadow: rgba(0,0,0,.4) 0 2px 2px
+  .title
+    font-size: 30px
+    font-weight: 100
+    color: #333
+    margin-bottom: 20px
+
+.footer
+  position: fixed
+  bottom: 0
+  left: 0
+  font-size: 12px
+  width: 100%
+  border-bottom: 5px solid #F09
+
+.thumbs
+  float: right

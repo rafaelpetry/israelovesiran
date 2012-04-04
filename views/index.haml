@@ -1,9 +1,9 @@
 %form{ :action => '/upload', :method => 'post', :enctype => "multipart/form-data" }
   .choose-picture
-    %h2 Upload a picture
+    %label.title{:for => 'choose-picture'} Upload a picture
     %input#choose-picture{ :type => 'file', :name => 'photo'}
   .color-picker
-    %h2 Pick a color
+    %h2.title Pick a color
     .controls
       %label.pink.active
         %input{ :type => 'radio', :name => 'color_scheme', :value => 'pink', :checked => 'checked' }
@@ -21,11 +21,10 @@
     %button.btn.btn-primary.btn-large{ :type => 'submit' } Generate your image!
 :javascript
   $(function() {
-    $('.controls label input[type="radio"]').click(function() {
+    $('.controls label input[type="radio"]').click(function () {
       $('.controls label').removeClass('active');
       $(this).parent('label').addClass('active');
     });
-
     $('input#choose-picture').on("change", function () {
       $('div.color-picker').show();
       $('div.generate').show();
