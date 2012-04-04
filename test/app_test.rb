@@ -12,7 +12,7 @@ class AppTest < Test::Unit::TestCase
   def test_root_should_present_the_submit_form
     get '/'
     assert last_response.ok?
-    assert_match /Iranians We Love You!/, last_response.body
+    assert_match /Iranians, We Love You!/, last_response.body
   end
 
   def test_upload_should_redirect_back_to_root_without_photo
