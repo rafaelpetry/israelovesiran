@@ -1,1 +1,1 @@
-rvm use "ruby-1.9.2@israelovesiran"
+rvm use --create "ruby-1.9.2@israelovesiran"
