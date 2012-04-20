@@ -26,15 +26,15 @@ module Sinatra
     end
 
     private
+    def logo_in(color_scheme)
+      "static/images/banners/#{color_scheme}.png"
+    end
+
     def resize(image, banner, banner_path)
       max_size = image[:width] * 0.8
       max_size *= 0.4 if use_small_logo?(image, banner_path)
 
       banner.resize "#{max_size}x#{max_size}"
-    end
-
-    def logo_in(color_scheme)
-      "static/images/banners/#{color_scheme}.png"
     end
 
     def use_small_logo?(image, banner_path)
