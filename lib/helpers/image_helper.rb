@@ -43,7 +43,7 @@ module Sinatra
     end
 
     def round?(banner_path)
-      banner_path =~ /round\.png/
+      !!(banner_path =~ /round\.png/)
     end
 
     def gravity(image, banner_path)

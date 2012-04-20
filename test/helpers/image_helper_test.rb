@@ -27,13 +27,13 @@ class ImageHelperTest < Test::Unit::TestCase
   def test_use_big_logo_if_photo_is_portrait
     photo = { :width => 100, :height => 200 }
 
-    assert_equal false, !!use_small_logo?(photo, 'banner_path')
+    assert_equal false, use_small_logo?(photo, 'banner_path')
   end
 
   def test_use_big_logo_if_photo_is_close_to_a_portrait
     photo = { :width => 85, :height => 100 }
 
-    assert_equal false, !!use_small_logo?(photo, 'banner_path')
+    assert_equal false, use_small_logo?(photo, 'banner_path')
   end
 
   def test_use_small_logo_if_photo_is_round
