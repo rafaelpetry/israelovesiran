@@ -5,14 +5,16 @@ module Sinatra
   module ImageHelper
     MAXIMUM_SIZE = 500
 
-    def add_logo(image_path, color_scheme)
+    def resize(image_path)
       user_img = MiniMagick::Image.open(image_path)
       user_img.resize "#{MAXIMUM_SIZE}x#{MAXIMUM_SIZE}"
       user_img.auto_orient
+    end
 
+    def add_logo(image_path, color_scheme)
       banner_path = logo_in(color_scheme)
       weloveiran_img = MiniMagick::Image.open(banner_path)
-      resize(user_img, weloveiran_img, banner_path)
+      resize_banner(user_img, weloveiran_img, banner_path)
 
       result = user_img.composite(weloveiran_img) do |c|
         c.gravity gravity(user_img, banner_path)
@@ -30,7 +32,7 @@ module Sinatra
       "static/images/banners/#{color_scheme}.png"
     end
 
-    def resize(image, banner, banner_path)
+    def resize_banner(image, banner, banner_path)
       max_size = image[:width] * 0.8
       max_size *= 0.4 if use_small_logo?(image, banner_path)
 

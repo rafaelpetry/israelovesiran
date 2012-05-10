@@ -31,6 +31,17 @@ get '/' do
   haml :index
 end
 
+post '/upload_from_mobile' do
+  tempfile = params['photo'][:tempfile]
+  file_name = tempfile.path
+
+  resize(file_name)
+
+  photo_id = flickr.upload file_name
+
+  status(200)
+end
+
 post '/upload' do
   unless is_an_image? params[:photo]
     session[:error] = "Please, upload an image"
@@ -40,7 +51,9 @@ post '/upload' do
   tempfile = params['photo'][:tempfile]
   file_name = tempfile.path
 
-  photo = add_logo(file_name, params[:color_scheme])
+  user_img = resize(file_name)
+
+  photo = add_logo(user_img, params[:color_scheme])
   photo.write(file_name)
 
   photo_id = flickr.upload file_name
