@@ -9,6 +9,7 @@ module Sinatra
       user_img = MiniMagick::Image.open(image_path)
       user_img.resize "#{MAXIMUM_SIZE}x#{MAXIMUM_SIZE}"
       user_img.auto_orient
+      user_img
     end
 
     def add_logo(user_img, color_scheme)
