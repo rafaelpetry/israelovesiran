@@ -11,7 +11,7 @@ module Sinatra
       user_img.auto_orient
     end
 
-    def add_logo(image_path, color_scheme)
+    def add_logo(user_img, color_scheme)
       banner_path = logo_in(color_scheme)
       weloveiran_img = MiniMagick::Image.open(banner_path)
       resize_banner(user_img, weloveiran_img, banner_path)
