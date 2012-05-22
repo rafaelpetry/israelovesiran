@@ -22,6 +22,11 @@ $(function() {
     $('body').addClass($(this).val());
   });
   $('input#choose-picture').on("change", function (evt) {
+    if (!evt.target.files[0].type.match('image.*')) {
+      alert("Please, choose an image.");
+      return;
+    }
+
     handleFileSelect(evt);
     $('div.color-picker').show();
     $('div.generate').show();
