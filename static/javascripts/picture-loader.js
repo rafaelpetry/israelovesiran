@@ -8,12 +8,10 @@ $(function() {
     var file = evt.target.files[0],
         reader = new FileReader();
 
-    reader.onload = (function(theFile) {
-      return function (e) {
-        var picture = '<img class="picture" src="' + e.target.result + '" title="' + escape(theFile.name) + '"/>';
+    reader.onload = function (e) {
+        var picture = '<img class="picture" src="' + e.target.result + '"/>';
         $('#picture').html(picture);
-      };
-    })(file);
+    };
 
     reader.readAsDataURL(file);
   };
