@@ -11,15 +11,21 @@ $(function() {
     reader.onload = function (e) {
         var picture = '<img class="picture" src="' + e.target.result + '"/>';
         $('#picture').html(picture);
+        $('.controls label.active input')[0].click()
     };
 
     reader.readAsDataURL(file);
   };
 
+  function updateBanner(bannerName) {
+    var banner = $('#banner'),
+        bannerImg = '<img class="banner-image '+bannerName+'" src="/images/banners/'+bannerName+'.png">';
+
+    banner.html(bannerImg);
+  };
+
   $('.controls label input[type="radio"]').click(function () {
     var bannerName = $(this).val();
-    var seal = $('#seal');
-    var banner = '';
 
     $('.controls label').removeClass('active');
     $(this).parent('label').addClass('active');
@@ -28,9 +34,7 @@ $(function() {
     $('body').removeAttr('class');
     $('body').addClass(bannerName);
 
-    banner = '<img class="seal-image '+bannerName+'" src="/images/banners/'+bannerName+'.png">';
-    seal.html(banner);
-
+    updateBanner(bannerName);
   });
   $('input#choose-picture').on("change", function (evt) {
     if (!evt.target.files[0].type.match('image.*')) {
