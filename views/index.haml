@@ -2,7 +2,9 @@
   .choose-picture
     %label.title{ :for => 'choose-picture' } Upload your picture
     %input#choose-picture{ :type => 'file', :name => 'photo'}
-    #picture
+    .editor-canvas
+      #seal
+      #picture
   .color-picker
     %h2.title Pick your message
     .controls
@@ -21,3 +23,17 @@
   .generate
     %button.btn.btn-primary.btn-large{ :type => 'submit' } Generate your image!
 %script{ :type => 'text/javascript', :src => '/javascripts/picture-loader.js' }
+%style
+  :sass
+    .editor-canvas
+      position: relative
+    #seal
+      position: absolute
+      bottom: 10px
+      right: 10px
+      .seal-image
+        height: 200px
+    #picture
+      img
+        border: 1px solid #DDD
+        min-width: 100%

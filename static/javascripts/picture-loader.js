@@ -15,11 +15,21 @@ $(function() {
   };
 
   $('.controls label input[type="radio"]').click(function () {
+    var bannerName = $(this).val();
+    var seal = $('#seal');
+    var banner = '';
+
     $('.controls label').removeClass('active');
     $(this).parent('label').addClass('active');
+
     // this is the cherry on the top
     $('body').removeAttr('class');
-    $('body').addClass($(this).val());
+    $('body').addClass(bannerName);
+
+    banner = '<img class="seal-image '+bannerName+'" src="/images/banners/'+bannerName+'.png">';
+    seal.empty();
+    seal.append(banner);
+
   });
   $('input#choose-picture').on("change", function (evt) {
     if (!evt.target.files[0].type.match('image.*')) {
@@ -31,4 +41,7 @@ $(function() {
     $('div.color-picker').show();
     $('div.generate').show();
   });
+
+
+
 });
