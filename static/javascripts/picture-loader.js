@@ -10,9 +10,8 @@ $(function() {
 
     reader.onload = (function(theFile) {
       return function (e) {
-        var span = document.createElement('span');
-        span.innerHTML = ['<img class="picture" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
-        $('#picture').prepend(span);
+        var picture = '<img class="picture" src="' + e.target.result + '" title="' + escape(theFile.name) + '"/>';
+        $('#picture').html(picture);
       };
     })(file);
 
