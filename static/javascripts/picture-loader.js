@@ -29,8 +29,7 @@ $(function() {
     $('body').addClass(bannerName);
 
     banner = '<img class="seal-image '+bannerName+'" src="/images/banners/'+bannerName+'.png">';
-    seal.empty();
-    seal.append(banner);
+    seal.html(banner);
 
   });
   $('input#choose-picture').on("change", function (evt) {
