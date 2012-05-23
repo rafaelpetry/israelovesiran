@@ -1,5 +1,10 @@
 $(function() {
   function handleFileSelect(evt) {
+    if (!(window.File && window.FileReader && window.FileList && window.Blob)) {
+      // File APIs are not supported
+      return;
+    }
+
     var file = evt.target.files[0],
         reader = new FileReader();
 
