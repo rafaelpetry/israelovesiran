@@ -9,19 +9,42 @@ $(function() {
         reader = new FileReader();
 
     reader.onload = function (e) {
-        var picture = '<img class="picture" src="' + e.target.result + '"/>';
+        var picture = new Image();
+        picture.src = e.target.result;
+        picture.className = 'picture';
         $('#picture').html(picture);
-        $('.controls label.active input')[0].click()
+
+        picture.onload = function () {
+          $('.controls label.active input')[0].click();
+        };
     };
 
     reader.readAsDataURL(file);
   };
 
   function updateBanner(bannerName) {
-    var banner = $('#banner'),
-        bannerImg = '<img class="banner-image '+bannerName+'" src="/images/banners/'+bannerName+'.png">';
+    var image = $('#picture img');
+    $.ajax({
+      type: 'GET',
+      url: '/max_width', 
+      dataType: 'json',
+      data: { width: image.width(), height: image.height(), banner_name: bannerName }, 
+      success: function (response) {
+        $('#editor-canvas').width(image.width());    
+        overlayBannerOnTheImage(response, bannerName);
+      }
+    });
+  };
 
-    banner.html(bannerImg);
+  function overlayBannerOnTheImage(sizingInfo, bannerName) {
+    bannerImg = '<img class="banner-image '+bannerName+'" src="/images/banners/'+bannerName+'.png" width="'+sizingInfo.width+'">';
+
+    $('#banner').html(bannerImg);
+    $('#banner').attr('class', sizingInfo.gravity);
+
+    if (sizingInfo.gravity === 'south') {
+      $('#banner').css('margin-left', -1 * (sizingInfo.width / 2));
+    }
   };
 
   $('.controls label input[type="radio"]').click(function () {
@@ -37,6 +60,7 @@ $(function() {
     updateBanner(bannerName);
   });
   $('input#choose-picture').on("change", function (evt) {
+    $('#editor-canvas').css('width', '100%');
     if (!evt.target.files[0].type.match('image.*')) {
       alert("Please, choose an image.");
       return;
@@ -46,7 +70,5 @@ $(function() {
     $('div.color-picker').show();
     $('div.generate').show();
   });
-
-
 
 });
