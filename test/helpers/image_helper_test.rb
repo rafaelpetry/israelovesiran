@@ -55,12 +55,12 @@ class ImageHelperTest < Test::Unit::TestCase
   end
 
   def test_gets_maximum_width_for_normal_banner
-    expected = { 'width' => 68, 'gravity' => 'South' }
+    expected = { 'width' => 68, 'gravity' => 'south' }
     assert_equal expected, max_width_for(85, 100, 'pink')
   end
 
   def test_gets_maximum_width_for_small_banner
-    expected = { 'width' => 27.200000000000003, 'gravity' => 'Southeast' }
+    expected = { 'width' => 27.200000000000003, 'gravity' => 'southeast' }
     assert_equal expected, max_width_for(85, 100, 'round')
   end
 
