@@ -28,16 +28,27 @@ module Sinatra
       photo && (photo[:type] =~ /image\/.+/)
     end
 
+    def max_width_for(width, height, banner_name)
+      image = { :width => width, :height => height }
+      max_size = define_max_size(image, banner_name)
+
+      { 'width' => max_size, 'gravity' => gravity(image, banner_name).downcase }
+    end
+
     private
     def logo_in(color_scheme)
       "static/images/banners/#{color_scheme}.png"
     end
 
     def resize_banner(image, banner, banner_path)
+      max_size = define_max_size(image, banner_path)
+      banner.resize "#{max_size}x#{max_size}"
+    end
+
+    def define_max_size(image, banner_path)
       max_size = image[:width] * 0.8
       max_size *= 0.4 if use_small_logo?(image, banner_path)
-
-      banner.resize "#{max_size}x#{max_size}"
+      max_size
     end
 
     def use_small_logo?(image, banner_path)
@@ -46,7 +57,7 @@ module Sinatra
     end
 
     def round?(banner_path)
-      !!(banner_path =~ /round\.png/)
+      !!(banner_path =~ /round/)
     end
 
     def gravity(image, banner_path)

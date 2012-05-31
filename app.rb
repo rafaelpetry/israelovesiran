@@ -77,6 +77,11 @@ get '/callback/facebook/:photo_id' do
   redirect "/show/#{params[:photo_id]}"
 end
 
+get '/max_width' do
+  content_type :json
+  max_width_for(params[:width].to_i, params[:height].to_i, params[:banner_name]).to_json
+end
+
 get '/stylesheets/styles.css' do
   content_type 'text/css', :charset => 'utf-8'
   sass :styles

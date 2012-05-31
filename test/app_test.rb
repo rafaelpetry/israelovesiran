@@ -31,4 +31,8 @@ class AppTest < Test::Unit::TestCase
     assert last_response.ok?
   end
 
+  def test_gives_max_width_for_the_given_width_height_and_banner_name
+    get '/max_width', { width: 85, height: 100, banner_name: 'pink' }
+    assert_equal '{"width":68.0,"gravity":"South"}', last_response.body
+  end
 end
