@@ -38,6 +38,7 @@ post '/upload_from_mobile' do
   resize(file_name)
 
   photo_id = flickr.upload file_name
+  flickr.set_coordinates(photo_id, params[:latitude], params[:longitude])
 
   status(200)
 end
@@ -57,6 +58,7 @@ post '/upload' do
   photo.write(file_name)
 
   photo_id = flickr.upload file_name
+  flickr.set_coordinates(photo_id, params[:latitude], params[:longitude])
 
   redirect "/show/#{photo_id}"
 end
