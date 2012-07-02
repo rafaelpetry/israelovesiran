@@ -58,13 +58,19 @@ post '/upload' do
   photo.write(file_name)
 
   photo_id = flickr.upload file_name
-  flickr.set_coordinates(photo_id, params[:latitude], params[:longitude])
+  session['set_coordinates'] = true
 
   redirect "/show/#{photo_id}"
 end
 
 get '/show/:photo_id' do
-  haml :show, :locals => { :photo_url => flickr.photo_url(params[:photo_id]), :photo_id => params[:photo_id] }
+  haml :show, :locals => { :photo_url => flickr.photo_url(params[:photo_id]),
+                           :photo_id => params[:photo_id],
+                           :set_coordinates => session['set_coordinates'] }
+end
+
+post '/coordinates/:photo_id/:latitude/:longitude' do
+  flickr.set_coordinates(params[:photo_id], params[:latitude], params[:longitude])
 end
 
 get '/share/facebook/:photo_id' do

@@ -1,15 +1,11 @@
 $(function () {
     function geolocationSuccess(position) {
-      $('<input>').attr({
-        type: 'hidden',
-        name: 'latitude',
-        value: position.coords.latitude
-      }).appendTo('form');
-      $('<input>').attr({
-        type: 'hidden',
-        name: 'longitude',
-        value: position.coords.longitude
-      }).appendTo('form');
+      var photo_id = $('img.user-image').attr('id'),
+          lat = position.coords.latitude,
+          lon = position.coords.longitude,
+          url = '/coordinates/'+photo_id+'/'+lat+'/'+lon;
+
+      $.post(url);
     }
 
     $(document).ready(function () {
